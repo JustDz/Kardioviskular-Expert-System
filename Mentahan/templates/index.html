@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnosa Penyakit Jantung</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-image: url('path/to/your/image/bg.png'); /* Ganti dengan jalur gambar Anda */
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(8px);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .diag-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .scrollable-container {
+            max-height: 300px; /* Sesuaikan tinggi sesuai kebutuhan */
+            overflow-y: auto; /* Menambahkan scroll pada Y axis */
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%; /* Agar form menyesuaikan lebar container */
+        }
+
+        label {
+            margin-top: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        select {
+            margin-left: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+            width: 100%;
+            max-width: 200px; 
+        }
+
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="diag-container">
+    <h2>Diagnosa Penyakit Jantung</h2>
+    
+    <div class="scrollable-container">
+      <form action="{{ url_for('diagnose_route') }}" method="post">
+            {% for code, name in symptoms.items() %}
+                <label for="{{ code }}">{{ name }}</label>
+                <select name="{{ code }}" id="{{ code }}">
+                    <option value="1">1 - Tidak Tahu</option>
+                    <option value="2">2 - Hampir Mungkin</option>
+                    <option value="3">3 - Mungkin</option>
+                    <option value="4">4 - Cukup Yakin</option>
+                    <option value="5">5 - Yakin</option>
+                    <option value="6">6 - Sangat Yakin</option>
+                </select>
+                <br />
+            {% endfor %}
+        </form>
+    </div>
+
+    <button type="submit">Diagnosa</button>
+
+  </div>
+</body>
+</html>

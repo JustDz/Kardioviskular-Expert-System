@@ -1,0 +1,60 @@
+P01 - Jantung Koroner
+G01: Nyeri Dada - 0.8
+G02: Keringat Dingin - 0.6
+G03: Nyeri Ulu Hati - 0.4
+G04: Penurunan Kesadaran - 0.6
+G05: Denyut Nadi Lemah - 0.6
+G06: Sesak Nafas - 0.4
+G07: Pusing - 0.2
+G08: Mual/Muntah - 0.4
+
+P02 - Gagal Jantung Kongestif
+G06: Sesak Nafas - 0.8
+G09: Kaki Bengkak - 0.6
+G10: Perut Membesar - 0.4
+G08: Mual/Muntah - 0.4
+G01: Nyeri Dada - 0.8
+G04: Penurunan Kesadaran - 0.6
+G11: Sesak Saat Malam Hari - 0.6
+G12: Posisi Tidur 2 Bantal - 0.8
+G17: Mudah Lelah - 0.6
+
+P03 - Katup Jantung
+G13: Berdebar - 0.4
+G06: Sesak Nafas - 0.8
+G14: Batuk Berdarah - 0.4
+G11: Sesak Saat Malam Hari - 0.6
+G17: Mudah Lelah - 0.6
+G09: Kaki Bengkak - 0.6
+G04: Penurunan Kesadaran - 0.6
+
+P04 - Aritmia
+G13: Berdebar - 0.8
+G07: Pusing - 0.4
+G17: Mudah Lelah - 0.6
+G04: Penurunan Kesadaran - 0.6
+G06: Sesak Nafas - 0.8
+G15: Nadi Tidak Teraba - 0.8
+G16: Nadi Tidak Teratur - 0.8
+
+P05 - Jantung Bawaan
+G06: Sesak Nafas - 0.8
+G18: Bibir Membiru - 0.8
+G17: Mudah Lelah - 0.6
+G19: Bagian Bawah Kuku Membiru - 0.8
+G20: Infeksi Saluran Nafas Berulang - 0.6
+G21: Sulit menyusu pada bayi - 0.8
+
+P06 - Pembuluh Darah
+G09: Kaki Bengkak - 0.6
+G22: Nyeri pada Tangan/Kaki - 0.6
+G23: Kaki/Tangan Memerah - 0.8
+G24: Kaki/Tangan Membiru - 0.8
+G25: Kaki/Tangan Terasa Panas - 0.8
+G26: Kaki/Tangan Terasa Dingin - 0.8
+G27: Luka pada Kaki/Tangan Sulit Sembuh - 0.8
+G28: Kesemutan pada Kaki/Tangan - 0.6
+G29: Pandangan Kabur - 0.4
+G01: Nyeri Dada - 0.8
+G07: Pusing - 0.2
+G04: Penurunan Kesadaran - 0.6
