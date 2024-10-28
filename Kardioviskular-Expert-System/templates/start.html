@@ -64,7 +64,7 @@
         }
 
         body {
-            margin-top: 450px;
+            margin-top: 550px;
         }
 
         .container-box {
@@ -112,6 +112,10 @@
             color: #333;
         }
 
+        .container-box .pengertian {
+            text-align: justify;
+        }   
+
         .container-box p {
             font-size: 16px;
             color: #555;
@@ -127,6 +131,7 @@
         }
 
         .card h2 {
+            text-align: center;
             color: #333;
             margin-top: 0;
         }
@@ -154,8 +159,12 @@
             padding: 5px;
             border-radius: 10px;
             text-align: left;
-            flex-basis: calc(5%); /* 3 items per row */
-            margin-bottom: 5px;          
+            flex-basis: calc(25%); 
+            margin-bottom: 5px;         
+        }
+
+        .card-type:hover {
+            transform: scale(1.2);
         }
 
         .card-type p{
@@ -163,7 +172,7 @@
         }
 
         legend {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 600;
         }
 
@@ -176,6 +185,10 @@
 
         p {
             text-warp: balance;
+        }
+
+        h2 {
+              margin-bottom: 20px;
         }
 
         fieldset {
@@ -198,24 +211,23 @@
 
     <!-- Main Content with Two Containers -->
     <main>
-        <!-- First Container -->
+
         <section class="container-box">
             <h1>Diagnosa Penyakit Kardiovaskular</h1>
             <p>Cek penyakit dengan menekan tombol ini!</p>
             <a href="/diagnosa" class="button">Mulai Diagnosa</a>
         </section>
 
-        <!-- Second Container -->
         <section class="container-box">
             <div class="card">
                 <h2>Apa itu Penyakit Kardiovaskular?</h2>
-                <p>Penyakit kardiovaskular adalah kelompok gangguan pada jantung dan pembuluh darah yang meliputi penyakit jantung koroner, penyakit arteri perifer, dan kondisi lain yang terkait. Penyakit ini dapat menyebabkan komplikasi serius seperti serangan jantung dan stroke. Penting untuk menjaga kesehatan jantung melalui pola makan sehat, olahraga, dan pemeriksaan rutin.</p>
+                <p class="pengertian">Penyakit kardiovaskular adalah kelompok gangguan pada jantung dan pembuluh darah yang meliputi penyakit jantung koroner, penyakit arteri perifer, dan kondisi lain yang terkait. Penyakit ini dapat menyebabkan komplikasi serius seperti serangan jantung dan stroke. Penting untuk menjaga kesehatan jantung melalui pola makan sehat, olahraga, dan pemeriksaan rutin.</p>
             </div>
         </section>
 
         <section class="container-box">
             <div class="card">
-                <h2>Jenis-jenis penyakit kardiovaskular</h2>
+                <h2>Jenis-Jenis Penyakit Kardiovaskular</h2>
 
                 <div class="card-container">
                     <div class="card-type">
@@ -252,7 +264,7 @@
                     <div class="card-type">
                         <fieldset>
                             <legend>Jantung Bawaan</legend>
-                            <img src="/static/jantungbawaan.jpg" alt="Gambar Jantung Bawaan">
+                            <img src="/static/jantungbawaan.png" alt="Gambar Jantung Bawaan">
                             <p>Jantung Bawaan merupakan kelainan struktural jantung yang sudah ada sejak lahir, sering karena perkembangan yang tidak sempurna saat janin.</p>
                         </fieldset>
                     </div>
@@ -260,7 +272,7 @@
                     <div class="card-type">
                         <fieldset>
                             <legend>Pembuluh Darah</legend>
-                            <img src="/static/pembuluhdarah.jpg" alt="Gambar Pembuluh Darah">
+                            <img src="/static/pem.jpg" alt="Gambar Pembuluh Darah">
                             <p>Gangguan Pembuluh Darah memengaruhi arteri dan vena, menghambat aliran darah, terutama ke ekstremitas, yang memicu berbagai gejala akibat aliran darah yang terganggu.</p>
                         </fieldset>
                     </div>
