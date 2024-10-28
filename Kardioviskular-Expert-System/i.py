@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 
-app = Flask(__name__)
+app = Flask(name)
 
 # Fungsi untuk menghitung Certainty Factor (CF)
 def calculate_cf(user_cf, expert_cf):
@@ -18,11 +18,8 @@ def get_user_cf(choice):
 
 # Fungsi untuk membaca knowledge base dari file di direktori data
 def load_knowledge_base_from_file():
-    knowledge_bases = {}
-    # Tentukan path absolut untuk file knowledge base dalam direktori "data"
-    file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "knowledge_bases.txt"))
-    
-    print(f"Mencoba memuat file knowledge base dari path: {file_path}")
+    knowledge_base = {}
+    file_path = os.path.abspath(os.path.join(os.path.dirname(file), "knowledge_bases.txt"))
     
     try:
         with open(file_path, 'r') as file:
@@ -33,20 +30,20 @@ def load_knowledge_base_from_file():
                     continue
                 if line.startswith("P"):  # Baris yang memulai kode penyakit
                     penyakit_code, penyakit_name = line.split(" - ")
-                    knowledge_bases[penyakit_code] = {'name': penyakit_name, 'symptoms': {}}
+                    knowledge_base[penyakit_code] = {'name': penyakit_name, 'symptoms': {}}
                 elif line.startswith("G"):  # Baris yang memulai kode gejala
                     gejala_code, rest = line.split(": ")
                     gejala_name, weight = rest.split(" - ")
-                    knowledge_bases[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
+                    knowledge_base[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
         print("Knowledge base berhasil dimuat.")
     except FileNotFoundError:
         print(f"File {file_path} tidak ditemukan. Pastikan file berada di direktori 'data' dan bernama 'knowledge_bases.txt'.")
     except Exception as e:
         print("Terjadi error saat membaca knowledge base:", e)
-    return knowledge_bases
+    return knowledge_base
 
-# Fungsi untuk melakukan diagnosa
-def diagnose(gejala_user, knowledge_bases):
+# Fungsi untuk melakukan forward chaining diagnosis
+def forward_chaining_diagnose(gejala_user, knowledge_base):
     # Basis pengetahuan awal
     known_facts = set(gejala_user.keys())
     conclusions = {}
@@ -54,7 +51,7 @@ def diagnose(gejala_user, knowledge_bases):
 
     while changed:
         changed = False  # Set ulang setiap iterasi
-        for penyakit_code, penyakit_data in knowledge_bases.items():
+        for penyakit_code, penyakit_data in knowledge_base.items():
             symptoms = penyakit_data['symptoms']
             cf_combine = 0.0
             all_symptoms_present = True
@@ -94,12 +91,12 @@ def start():
 @app.route('/diagnosa')
 def index():
     # Muat knowledge base dan kumpulkan semua gejala unik
-    knowledge_bases = load_knowledge_base_from_file()
-    if not knowledge_bases:
+    knowledge_base = load_knowledge_base_from_file()
+    if not knowledge_base:
         return "Error: File knowledge base tidak ditemukan atau kosong."
     
     symptoms = {}
-    for penyakit_data in knowledge_bases.values():
+    for penyakit_data in knowledge_base.values():
         for gejala_code, gejala_data in penyakit_data['symptoms'].items():
             if gejala_code not in symptoms:
                 symptoms[gejala_code] = gejala_data['name']
@@ -115,13 +112,14 @@ def diagnose_route():
     # Ambil data dari form
     gejala_user = process_user_input(request.form)
 
-    # Lakukan diagnosis berdasarkan gejala
-    hasil_diagnosis = diagnose(gejala_user, knowledge_base)
+    # Lakukan forward chaining diagnosis berdasarkan gejala
+    hasil_diagnosis = forward_chaining_diagnose(gejala_user, knowledge_base)
+
     # Filter hasil diagnosis untuk nilai CF > 0
     hasil_diagnosis_filtered = [diagnosis for diagnosis in hasil_diagnosis if diagnosis[1] > 0]
 
     # Render halaman hasil diagnosis
     return render_template('result.html', diagnosis_results=hasil_diagnosis_filtered)
 
-if __name__ == '__main__':
+if name == 'main':
     app.run(debug=True)

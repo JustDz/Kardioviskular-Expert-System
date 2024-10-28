@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diagnosa Kesehatan Printer</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(-45deg, #a7cea9, #5ca68f, #1d7b7e, #1f5f78);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             height: 100vh;
-            font-family: Arial, sans-serif;
+            font-family: Poppins, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            flex-direction: column;
         }
 
         @keyframes gradient {
@@ -61,20 +63,26 @@
             font-weight: bold;
         }
 
+        body {
+            margin-top: 450px;
+        }
+
         .container-box {
             background: rgba(248, 248, 255, 0.9);
             border-radius: 15px;
             padding: 40px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             width: 90%;
+            margin-top: 40px;
+            margin-bottom: 20px;
         }
 
         .button {
             display: block;
             align-self: center;
-            margin: 10px auto; /* perubahan untuk memusatkan */
+            margin: 10px auto;
             padding: 5px 15px;
             cursor: pointer;
             border: 0px solid rgb(1, 102, 26);
@@ -84,24 +92,18 @@
             padding: 16px 30px;
             transition: 805ms;
             width: 250px;
-            box-shadow: rgb(194, 194, 194) -11px 20px 25px 5px;
+            box-shadow: rgb(194, 194, 194) -5px 10px 20px 5px;
             border-radius: 10px;
             background: rgb(2, 191, 59);
             font-weight: 500;
-            --hover-bgc: #006b02;
-            --hover-color: #ffffff;
-            --hover-borderSize: 0px;
             text-align: center;
         }
-        
 
         .button:hover {
             color: rgb(255, 255, 255);
             width: 200px;
-            background: rgb(0, 107, 2) none repeat scroll 0% 0% / auto padding-box border-box;
+            background: rgb(0, 107, 2);
             border-color: rgb(204, 0, 105);
-            border-width: 0px;
-            border-style: solid;
         }
 
         .container-box h1 {
@@ -116,6 +118,75 @@
             margin-bottom: 20px;
         }
 
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #555;
+        }
+
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;              
+            flex-direction: row;         
+            justify-content: center; 
+            align-items: flex-start;     
+            gap: 20px;                   
+            width: 100%;
+            max-width: 800px;                
+            box-sizing: border-box;      
+            margin-top: 20px;
+        }
+
+        .card-type {
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 10px;
+            text-align: left;
+            flex-basis: calc(5%); /* 3 items per row */
+            margin-bottom: 5px;          
+        }
+
+        .card-type p{
+            font-size: 12px
+        }
+
+        legend {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        img {
+            width: 100%;
+            height: 30%;               
+            object-fit: cover;
+            object-position: 0% 10%;    
+        }
+
+        p {
+            text-warp: balance;
+        }
+
+        fieldset {
+            border: 4px solid #ddd;
+            border-radius: 8px;
+            padding: 5px;
+            height: 300px;
+            width: 140px;
+        }
+      
+
     </style>
 </head>
 <body>
@@ -125,11 +196,79 @@
         <h2>Sistem Pakar</h2>
     </header>
 
-    <!-- Main Content in Centered Box -->
-    <main class="container-box">
-        <h1>Diagnosa Penyakit Kardiovaskular</h1>
-        <p>Cek penyakit dengan menekan tombol ini!</p>
-        <a href="/diagnosa" class="button">Mulai Diagnosa</a>
+    <!-- Main Content with Two Containers -->
+    <main>
+        <!-- First Container -->
+        <section class="container-box">
+            <h1>Diagnosa Penyakit Kardiovaskular</h1>
+            <p>Cek penyakit dengan menekan tombol ini!</p>
+            <a href="/diagnosa" class="button">Mulai Diagnosa</a>
+        </section>
+
+        <!-- Second Container -->
+        <section class="container-box">
+            <div class="card">
+                <h2>Apa itu Penyakit Kardiovaskular?</h2>
+                <p>Penyakit kardiovaskular adalah kelompok gangguan pada jantung dan pembuluh darah yang meliputi penyakit jantung koroner, penyakit arteri perifer, dan kondisi lain yang terkait. Penyakit ini dapat menyebabkan komplikasi serius seperti serangan jantung dan stroke. Penting untuk menjaga kesehatan jantung melalui pola makan sehat, olahraga, dan pemeriksaan rutin.</p>
+            </div>
+        </section>
+
+        <section class="container-box">
+            <div class="card">
+                <h2>Jenis-jenis penyakit kardiovaskular</h2>
+
+                <div class="card-container">
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Jantung Koroner</legend>
+                            <img src="/static/jantungkoroner.jpg" alt="Gambar Jantung Koroner">
+                            <p>Jantung Koroner terjadi akibat penyempitan atau penyumbatan pada arteri koroner yang mengurangi aliran darah ke otot jantung.</p>
+                        </fieldset>
+                    </div>
+                
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Gagal Jantung Kongestif</legend>
+                            <img src="/static/gagaljantung.jpg" alt="Gambar Gagal Jantung">
+                            <p>Gagal Jantung Kongestif adalah kondisi kronis di mana jantung tidak dapat memompa darah dengan efektif, sehingga cairan menumpuk di paru-paru dan tubuh
+                    </div>
+                
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Katup Jantung</legend>
+                            <img src="/static/katup.jpg" alt="Gambar Katup Jantung">
+                            <p>Penyakit Katup Jantung melibatkan gangguan pada katup jantung yang menghambat aliran darah melalui jantung.</p>
+                        </fieldset>
+                    </div>
+
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Aritmia</legend>
+                            <img src="/static/aritmia.jpg" alt="Gambar Aritmia">
+                            <p>Aritmia adalah gangguan ritme jantung yang menyebabkan detak jantung tidak teratur akibat masalah pada sistem konduksi listrik jantung.</p>
+                        </fieldset>
+                    </div>
+
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Jantung Bawaan</legend>
+                            <img src="/static/jantungbawaan.jpg" alt="Gambar Jantung Bawaan">
+                            <p>Jantung Bawaan merupakan kelainan struktural jantung yang sudah ada sejak lahir, sering karena perkembangan yang tidak sempurna saat janin.</p>
+                        </fieldset>
+                    </div>
+
+                    <div class="card-type">
+                        <fieldset>
+                            <legend>Pembuluh Darah</legend>
+                            <img src="/static/pembuluhdarah.jpg" alt="Gambar Pembuluh Darah">
+                            <p>Gangguan Pembuluh Darah memengaruhi arteri dan vena, menghambat aliran darah, terutama ke ekstremitas, yang memicu berbagai gejala akibat aliran darah yang terganggu.</p>
+                        </fieldset>
+                    </div>
+
+                </div>
+                
+            </div>
+        </section>
     </main>
 
 </body>
