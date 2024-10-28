@@ -67,6 +67,10 @@ def process_user_input(form_data):
     return gejala_user
 
 @app.route('/')
+def start():
+    return render_template('start.html')
+
+@app.route('/diagnosa')
 def index():
     # Muat knowledge base dan kumpulkan semua gejala unik
     knowledge_base = load_knowledge_base_from_file()
