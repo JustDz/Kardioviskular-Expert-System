@@ -5,11 +5,13 @@ app = Flask(__name__)
 
 # Fungsi untuk menghitung Certainty Factor (CF)
 def calculate_cf(user_cf, expert_cf):
-    """Menghitung CF berdasarkan input user dan pakar."""
+    
+    # Hitung CF
     return user_cf * expert_cf
 
 def combine_cf(cf_old, cf_new):
-    """Menggabungkan dua nilai CF."""
+    
+    # Gabungkan 2 nilai CF
     return cf_old + cf_new * (1 - cf_old)
 
 # Fungsi untuk mendapatkan nilai CF dari input user
@@ -18,7 +20,7 @@ def get_user_cf(choice):
 
 # Fungsi untuk membaca knowledge base dari file di direktori data
 def load_knowledge_base_from_file():
-    knowledge_bases = {}
+    knowledge_base = {}
     # Tentukan path absolut untuk file knowledge base dalam direktori "data"
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "knowledge_bases.txt"))
     
@@ -33,51 +35,43 @@ def load_knowledge_base_from_file():
                     continue
                 if line.startswith("P"):  # Baris yang memulai kode penyakit
                     penyakit_code, penyakit_name = line.split(" - ")
-                    knowledge_bases[penyakit_code] = {'name': penyakit_name, 'symptoms': {}}
+                    knowledge_base[penyakit_code] = {'name': penyakit_name, 'symptoms': {}}
                 elif line.startswith("G"):  # Baris yang memulai kode gejala
                     gejala_code, rest = line.split(": ")
                     gejala_name, weight = rest.split(" - ")
-                    knowledge_bases[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
+                    knowledge_base[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
         print("Knowledge base berhasil dimuat.")
     except FileNotFoundError:
         print(f"File {file_path} tidak ditemukan. Pastikan file berada di direktori 'data' dan bernama 'knowledge_bases.txt'.")
     except Exception as e:
         print("Terjadi error saat membaca knowledge base:", e)
-    return knowledge_bases
+    return knowledge_base
 
 # Fungsi untuk melakukan diagnosa
-def diagnose(gejala_user, knowledge_bases):
-    # Basis pengetahuan awal
-    known_facts = set(gejala_user.keys())
-    conclusions = {}
-    changed = True
+def diagnose(gejala_user, knowledge_base):
+    hasil_diagnosis = []
+    
+    # Iterasi melalui setiap penyakit dalam knowledge base
+    for penyakit_code, penyakit_data in knowledge_base.items():
+        cf_combine = 0.0
+        match_found = False
+        
+        # Iterasi melalui setiap gejala untuk penyakit
+        for gejala_code, expert_cf in penyakit_data['symptoms'].items():
+            # Cek apakah gejala user cocok dengan gejala penyakit
+            user_cf = gejala_user.get(gejala_code, 0.0)
+            if user_cf > 0:  # Hanya jika ada CF dari user
+                match_found = True  # Menandakan ada kecocokan gejala
+                cf_current = calculate_cf(user_cf, expert_cf['weight'])
+                cf_combine = combine_cf(cf_combine, cf_current)
 
-    while changed:
-        changed = False  # Set ulang setiap iterasi
-        for penyakit_code, penyakit_data in knowledge_bases.items():
-            symptoms = penyakit_data['symptoms']
-            cf_combine = 0.0
-            all_symptoms_present = True
+        # Hanya tambahkan hasil jika ada gejala yang cocok
+        if match_found:
+            hasil_diagnosis.append((penyakit_data['name'], cf_combine))
 
-            # Periksa apakah semua gejala dalam aturan penyakit ada dalam known_facts
-            for gejala_code, gejala_info in symptoms.items():
-                expert_cf = gejala_info['weight']
-                user_cf = gejala_user.get(gejala_code, 0.0)
-                if gejala_code in known_facts:
-                    cf_current = calculate_cf(user_cf, expert_cf)
-                    cf_combine = combine_cf(cf_combine, cf_current)
-                else:
-                    all_symptoms_present = False
-
-            # Jika semua gejala yang diperlukan terpenuhi dan kesimpulan baru, tambahkan penyakit ini
-            if all_symptoms_present and penyakit_code not in conclusions:
-                conclusions[penyakit_data['name']] = cf_combine
-                known_facts.add(penyakit_code)
-                changed = True
-
-    # Urutkan kesimpulan berdasarkan CF tertinggi
-    sorted_conclusions = sorted(conclusions.items(), key=lambda x: x[1], reverse=True)
-    return sorted_conclusions
+    # Mengurutkan hasil berdasarkan nilai CF tertinggi
+    hasil_diagnosis.sort(key=lambda x: x[1], reverse=True)
+    return hasil_diagnosis
 
 # Fungsi untuk memproses input user dari form
 def process_user_input(form_data):
@@ -94,12 +88,12 @@ def start():
 @app.route('/diagnosa')
 def index():
     # Muat knowledge base dan kumpulkan semua gejala unik
-    knowledge_bases = load_knowledge_base_from_file()
-    if not knowledge_bases:
+    knowledge_base = load_knowledge_base_from_file()
+    if not knowledge_base:
         return "Error: File knowledge base tidak ditemukan atau kosong."
     
     symptoms = {}
-    for penyakit_data in knowledge_bases.values():
+    for penyakit_data in knowledge_base.values():
         for gejala_code, gejala_data in penyakit_data['symptoms'].items():
             if gejala_code not in symptoms:
                 symptoms[gejala_code] = gejala_data['name']
