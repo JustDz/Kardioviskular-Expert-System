@@ -1,3 +1,5 @@
+Dibuat untuk memenuhi tugas UTS mata kuliah Sistem Pakar
+
 Kelompok 6:
 
 - Anita Neza Dewanti 2204129
