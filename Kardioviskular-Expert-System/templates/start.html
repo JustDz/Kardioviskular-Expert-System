@@ -1,288 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosa Kesehatan Printer</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(-45deg, #a7cea9, #5ca68f, #1d7b7e, #1f5f78);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            height: 100vh;
-            font-family: Poppins, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            flex-direction: column;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            color: white;
-            z-index: 10;
-        }
-
-        h2 {
-            color: white;
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        body {
-            margin-top: 550px;
-        }
-
-        .container-box {
-            background: rgba(248, 248, 255, 0.9);
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 800px;
-            width: 90%;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: block;
-            align-self: center;
-            margin: 10px auto;
-            padding: 5px 15px;
-            cursor: pointer;
-            border: 0px solid rgb(1, 102, 26);
-            font-family: "system-ui";
-            font-size: 20px;
-            color: rgb(255, 255, 255);
-            padding: 16px 30px;
-            transition: 805ms;
-            width: 250px;
-            box-shadow: rgb(194, 194, 194) -5px 10px 20px 5px;
-            border-radius: 10px;
-            background: rgb(2, 191, 59);
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .button:hover {
-            color: rgb(255, 255, 255);
-            width: 200px;
-            background: rgb(0, 107, 2);
-            border-color: rgb(204, 0, 105);
-        }
-
-        .container-box h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .container-box .pengertian {
-            text-align: justify;
-        }   
-
-        .container-box p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-
-        .card h2 {
-            text-align: center;
-            color: #333;
-            margin-top: 0;
-        }
-
-        .card p {
-            color: #555;
-        }
-
-        
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;              
-            flex-direction: row;         
-            justify-content: center; 
-            align-items: flex-start;     
-            gap: 20px;                   
-            width: 100%;
-            max-width: 800px;                
-            box-sizing: border-box;      
-            margin-top: 20px;
-        }
-
-        .card-type {
-            background-color: #fff;
-            padding: 5px;
-            border-radius: 10px;
-            text-align: left;
-            flex-basis: calc(25%); 
-            margin-bottom: 5px;
-            transition: 805ms;      
-        }
-
-        .card-type:hover {
-            transform: scale(1.2);
-        }
-
-        .card-type p{
-            font-size: 12px
-        }
-
-        legend {
-            font-size: 10.5px;
-            font-weight: 600;
-        }
-
-        img {
-            width: 100%;
-            height: 30%;               
-            object-fit: cover;
-            object-position: 0% 10%;    
-        }
-
-        p {
-            text-warp: balance;
-        }
-
-        h2 {
-              margin-bottom: 20px;
-        }
-
-        fieldset {
-            border: 4px solid #ddd;
-            border-radius: 8px;
-            padding: 5px;
-            height: 300px;
-            width: 140px;
-        }
-      
-
-    </style>
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar Toggle</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/start.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
     <!-- Header -->
-    <header>
-        <h2>Sistem Pakar</h2>
+    <header class="header">
+      <div class="container">
+        <a href="#" class="logo">SiPaKuLer</a>
+
+        <nav class="navbar" data-navbar>
+          <ul class="navbar-list">
+            <li><a href="#" class="navbar-link">Home</a></li>
+            <li><a href="#" class="navbar-link">About</a></li>
+            <li><a href="#" class="navbar-link">Our Team</a></li>
+          </ul>
+        </nav>
+
+        <!-- Tombol Toggle untuk Navbar -->
+        <button
+          class="nav-open-btn"
+          aria-label="toggle menu"
+          data-navbar-toggle-btn>
+          <ion-icon
+            name="menu-outline"
+            aria-hidden="true"
+            class="menu-icon"></ion-icon>
+          <ion-icon
+            name="close-outline"
+            aria-hidden="true"
+            class="close-icon"></ion-icon>
+        </button>
+
+        <!-- Overlay untuk menutup navbar di perangkat mobile -->
+        <div class="overlay" data-overlay></div>
+      </div>
     </header>
 
-    <!-- Main Content with Two Containers -->
     <main>
+      <article>
+        <!-- HERO -->
+        <section class="section hero" aria-label="hero">
+          <div class="container">
+            <div class="hero-content">
+              <h1 class="h1 title hero-title">
+                Diagnosa Penyakit Kardiovaskular
+              </h1>
 
-        <section class="container-box">
-            <h1>Diagnosa Penyakit Kardiovaskular</h1>
-            <p>Cek penyakit dengan menekan tombol ini!</p>
-            <a href="/diagnosa" class="button">Mulai Diagnosa</a>
-        </section>
+              <p class="hero-text">
+                Periksa kesehatan jantung Anda dengan mudah dan cepat. Mulai
+                diagnosa sekarang untuk mendapatkan gambaran kondisi
+                kardiovaskular Anda secara akurat!
+              </p>
 
-        <section class="container-box">
-            <div class="card">
-                <h2>Apa itu Penyakit Kardiovaskular?</h2>
-                <p class="pengertian">Penyakit kardiovaskular adalah kelompok gangguan pada jantung dan pembuluh darah yang meliputi penyakit jantung koroner, penyakit arteri perifer, dan kondisi lain yang terkait. Penyakit ini dapat menyebabkan komplikasi serius seperti serangan jantung dan stroke. Penting untuk menjaga kesehatan jantung melalui pola makan sehat, olahraga, dan pemeriksaan rutin.</p>
+              <div class="input-wrapper">
+                <a href="/diagnosa" class="btn btn-primary"
+                  >Periksa Sekarang!</a
+                >
+              </div>
             </div>
+          </div>
         </section>
 
-        <section class="container-box">
-            <div class="card">
-                <h2>Jenis-Jenis Penyakit Kardiovaskular</h2>
+        <!-- ----- ABOUT ----- -->
 
-                <div class="card-container">
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Jantung Koroner</legend>
-                            <img src="/static/jantungkoroner.jpg" alt="Gambar Jantung Koroner">
-                            <p>Jantung Koroner terjadi akibat penyempitan atau penyumbatan pada arteri koroner yang mengurangi aliran darah ke otot jantung.</p>
-                        </fieldset>
-                    </div>
-                
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Gagal Jantung Kongestif</legend>
-                            <img src="/static/gagaljantung.jpg" alt="Gambar Gagal Jantung">
-                            <p>Gagal Jantung Kongestif adalah kondisi kronis di mana jantung tidak dapat memompa darah dengan efektif, sehingga cairan menumpuk di paru-paru dan tubuh
-                    </div>
-                
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Katup Jantung</legend>
-                            <img src="/static/katup.jpg" alt="Gambar Katup Jantung">
-                            <p>Penyakit Katup Jantung melibatkan gangguan pada katup jantung yang menghambat aliran darah melalui jantung.</p>
-                        </fieldset>
-                    </div>
+        <!-- Pengertian -->
+        <section
+          class="section pengertian text-center"
+          aria-labelledby="pengertian-label">
+          <div class="container">
+            <figure class="pengertian-banner">
+              <img
+                src="{{ url_for('static', filename='image/think.png') }}"
+                width="734"
+                height="854"
+                loading="lazy"
+                alt="Ilustrasi tentang penyakit kardiovaskular" />
+            </figure>
 
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Aritmia</legend>
-                            <img src="/static/aritmia.jpg" alt="Gambar Aritmia">
-                            <p>Aritmia adalah gangguan ritme jantung yang menyebabkan detak jantung tidak teratur akibat masalah pada sistem konduksi listrik jantung.</p>
-                        </fieldset>
-                    </div>
+            <div class="pengertian-content">
+              <h2 class="h2 title section-title" id="pengertian-label">
+                Apa itu Penyakit Kardiovaskular?
+              </h2>
+              <p class="section-text">
+                Penyakit kardiovaskular adalah kelompok gangguan pada jantung
+                dan pembuluh darah yang meliputi penyakit jantung koroner,
+                penyakit arteri perifer, dan kondisi lain yang terkait. Penyakit
+                ini dapat menyebabkan komplikasi serius seperti serangan jantung
+                dan stroke. Penting untuk menjaga kesehatan jantung melalui pola
+                makan sehat, olahraga, dan pemeriksaan rutin.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Jantung Bawaan</legend>
-                            <img src="/static/jantungbawaan.png" alt="Gambar Jantung Bawaan">
-                            <p>Jantung Bawaan merupakan kelainan struktural jantung yang sudah ada sejak lahir, sering karena perkembangan yang tidak sempurna saat janin.</p>
-                        </fieldset>
-                    </div>
+        <!-- Penyakit -->
+        <section
+          class="section penyakit text-center"
+          aria-labelledby="penyakit-label">
+          <div class="container">
+            <h2 class="h2 title section-title">
+              Jenis-Jenis Penyakit Kardiovaskular
+            </h2>
 
-                    <div class="card-type">
-                        <fieldset>
-                            <legend>Pembuluh Darah</legend>
-                            <img src="/static/pem.jpg" alt="Gambar Pembuluh Darah">
-                            <p>Gangguan Pembuluh Darah memengaruhi arteri dan vena, menghambat aliran darah, terutama ke ekstremitas, yang memicu berbagai gejala akibat aliran darah yang terganggu.</p>
-                        </fieldset>
-                    </div>
+            <p class="section-text">
+              Beberapa penyakit yang termasuk penyakit kardiovaskular yaitu
+              sebagai berikut
+            </p>
 
+            <ul class="grid-list">
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-1.jpg') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
                 </div>
-                
-            </div>
+              </li>
+
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-2.jpg') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-3.png') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-4.jpg') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-5.jpg') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-6.jpg') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Card Heading</h2>
+                    <p>
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Nesciunt exercitationem iste, voluptatum, quia explicabo
+                      laboriosam rem adipisci voluptates cumque, veritatis atque
+                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
+                      hic.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </section>
+
+        <!-- Team -->
+        <footer class="footer"></footer>
+      </article>
     </main>
 
-</body>
+    <!-- Script untuk Navbar Toggle -->
+    <script src="./assets/js/script.js"></script>
+
+    <!-- ionicon -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
 </html>

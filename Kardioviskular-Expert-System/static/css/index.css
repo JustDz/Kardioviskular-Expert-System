@@ -1,0 +1,217 @@
+:root {
+  /* COLORS */
+
+  /* background color */
+  --bg-dark-purple: hsla(260, 62%, 11%, 1);
+  --bg-russian-violet: hsla(259, 61%, 14%, 1);
+  --bg-vivid-violet: hsla(273, 100%, 55%, 1);
+  --bg-sunglow: hsla(43, 100%, 61%, 1);
+  --bg-blue-jeans: hsla(202, 100%, 50%, 1);
+  --bg-white-alpha-10: hsla(0, 0%, 100%, 0.1);
+
+  /* text color */
+  --text-white: hsla(0, 0%, 100%, 1);
+  --text-black: hsla(0, 0%, 0%, 1);
+  --text-sunglow: hsla(43, 100%, 61%, 1);
+  --text-white-alpha-60: hsla(0, 0%, 100%, 0.6);
+
+  /* border color */
+  --border-blue-jeans: hsla(202, 100%, 50%, 1);
+  --border-white-alpha-10: hsla(0, 0%, 100%, 0.1);
+
+  /* TYPOGRAPHY */
+
+  /* font family */
+  --fontFamily-open-sans: "Nunito", serif;
+
+  /* font size */
+  --fontSize-1: 4rem;
+  --fontSize-2: 3.2rem;
+  --fontSize-3: 2.4rem;
+  --fontSize-4: 2rem;
+  --fontSize-5: 1.8rem;
+  --fontSize-6: 1.6rem;
+  --fontSize-7: 1.4rem;
+
+  /* font weight */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semiBold: 600;
+  --weight-bold: 700;
+
+  /* SPACING */
+  --section-spacing: 100px;
+
+  /* BOX SHADOW */
+  --shadow-1: drop-shadow(0 20px 30px hsla(0, 0%, 0%, 0.1));
+  --shadow-2: drop-shadow(0 20px 30px hsla(0, 0%, 0%, 0.2));
+
+  /* BORDER RADIUS */
+  --radius-24: 24px;
+  --radius-40: 40px;
+  --radius-pill: 500px;
+
+  /* TRANSITION */
+  --transition-1: 250ms ease;
+  --transition-2: 500ms ease;
+  --cubic-out: cubic-bezier(0, 1, 0.5, 1);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+html {
+  font-family: var(--fontFamily-open-sans);
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Nunito", serif;
+  padding: 20px;
+  background-color: var(--bg-dark-purple);
+  color: var(--text-white);
+  font-size: var(--fontSize-6);
+  line-height: 1.8;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text-white);
+  font-size: 2.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px; /* Perbesar jarak antar pertanyaan */
+  padding-bottom: 15px; /* Tambahkan padding bawah jika diperlukan */
+  border-bottom: 1px solid #ddd; /* Opsional: Tambahkan garis bawah untuk memisahkan */
+}
+
+.form-group label {
+  flex: 2;
+  margin-right: 20px;
+  font-size: 1rem;
+}
+
+.form-group .disease-label {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.form-group .radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.radio-label {
+  height: 50px; /* Tinggi kontainer tetap */
+  display: flex; /* Mengaktifkan Flexbox */
+  justify-content: center; /* Menyejajarkan secara horizontal */
+  align-items: center; /* Menyejajarkan secara vertikal */
+  text-align: center;
+}
+
+.radio-group {
+  height: 50px; /* Tinggi kontainer tetap */
+  flex: 2; /* Fleksibilitas untuk tata letak */
+  display: flex; /* Mengaktifkan Flexbox */
+  justify-content: center; /* Menyejajarkan secara horizontal */
+  align-items: center; /* Menyejajarkan secara vertikal */
+  text-align: center; /* Menjaga teks tetap rata tengah (opsional) */
+}
+
+.form-group input[type="radio"] {
+  margin-right: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  padding: 12px 20px;
+  margin: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination a.disabled {
+  color: #ccc;
+  border-color: #ccc;
+  pointer-events: none;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.page-info {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 1.5rem;
+  color: var(--text-white);
+}

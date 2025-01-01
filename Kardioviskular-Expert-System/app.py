@@ -85,19 +85,42 @@ def process_user_input(form_data):
 def start():
     return render_template('start.html')
 
-@app.route('/diagnosa')
+@app.route('/diagnosa', methods=['GET', 'POST'])
 def index():
     # Muat knowledge base dan kumpulkan semua gejala unik
     knowledge_base = load_knowledge_base_from_file()
     if not knowledge_base:
         return "Error: File knowledge base tidak ditemukan atau kosong."
-    
+
     symptoms = {}
     for penyakit_data in knowledge_base.values():
         for gejala_code, gejala_data in penyakit_data['symptoms'].items():
             if gejala_code not in symptoms:
                 symptoms[gejala_code] = gejala_data['name']
-    return render_template('index.html', symptoms=symptoms)
+
+    # Menyusun gejala menjadi list dan membaginya per halaman
+    symptoms_list = list(symptoms.items())  # Mengubah dictionary menjadi list
+    items_per_page = 10  # Menampilkan 10 gejala per halaman (tetapkan ini)
+    page = int(request.args.get('page', 1))  # Halaman yang aktif, default ke 1
+    start = (page - 1) * items_per_page  # Indeks mulai
+    end = start + items_per_page  # Indeks akhir
+
+    # Mengambil subset gejala untuk halaman ini
+    page_symptoms = symptoms_list[start:end]
+
+    # Total halaman berdasarkan jumlah gejala
+    total_pages = len(symptoms_list) // items_per_page + (1 if len(symptoms_list) % items_per_page > 0 else 0)
+
+    # Kirim variabel 'items_per_page' ke template
+    return render_template(
+        'index.html',
+        symptoms=page_symptoms,
+        page=page,
+        total_pages=total_pages,
+        items_per_page=items_per_page  # Jangan lupa mengirimkan ini ke template
+    )
+
+
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose_route():
@@ -105,12 +128,13 @@ def diagnose_route():
     knowledge_base = load_knowledge_base_from_file()
     if not knowledge_base:
         return "Error: Tidak dapat memuat knowledge base."
-
+    
     # Ambil data dari form
     gejala_user = process_user_input(request.form)
 
     # Lakukan diagnosis berdasarkan gejala
     hasil_diagnosis = diagnose(gejala_user, knowledge_base)
+
     # Filter hasil diagnosis untuk nilai CF > 0
     hasil_diagnosis_filtered = [diagnosis for diagnosis in hasil_diagnosis if diagnosis[1] > 0]
 
