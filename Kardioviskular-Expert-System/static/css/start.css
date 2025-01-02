@@ -295,6 +295,10 @@ body.nav-active {
 /* ----- Pengertian ------ */
 
 .pengertian {
+  background-image: url("/static/image/penyakit-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   padding-block-start: 150px;
   position: relative;
   z-index: 1;
