@@ -208,7 +208,7 @@ h1 {
   height: 10vh;
 }
 
-.pagination a {
+.pagination .page-btn {
   text-align: center;
   width: 150px;
   padding: 10px 20px;
@@ -221,9 +221,12 @@ h1 {
   box-sizing: border-box;
   transform: scale(0.9);
   transform-origin: center;
+  background: transparent;
+  color: var(--text-white);
+  cursor: pointer;
 }
 
-.pagination a:hover {
+.pagination .page-btn:hover {
   transform: scale(1);
   border: 3px solid;
   border-color: #4c8bf5;
@@ -231,19 +234,19 @@ h1 {
   color: white;
 }
 
-.pagination a.disabled {
+.pagination .page-btn.disabled {
   color: #6c6c6c;
   border-color: #6f6f6f;
   pointer-events: none;
 }
 
-button[type="submit"] {
+.submit-btn {
   font-family: "Nunito", serif;
   font-weight: 600;
   background-color: #006de1;
   width: 150px;
   padding: 10px 20px;
-  margin: 5px 10px;
+  margin: 10px 10px;
   border: 1px solid #006de1;
   border-radius: 5px;
   font-size: 1.8rem;
@@ -254,7 +257,8 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.submit-btn:hover {
+  transform: scale(1);
   background-color: #002c5a;
   box-shadow: 0 0 25px #4c8bf580;
   color: white;

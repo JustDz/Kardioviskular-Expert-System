@@ -19,29 +19,6 @@
       <div class="container">
         <a href="#" class="logo">SiPaKuLer</a>
 
-        <nav class="navbar" data-navbar>
-          <ul class="navbar-list">
-            <li><a href="#" class="navbar-link">Home</a></li>
-            <li><a href="#" class="navbar-link">About</a></li>
-            <li><a href="#" class="navbar-link">Our Team</a></li>
-          </ul>
-        </nav>
-
-        <!-- Tombol Toggle untuk Navbar -->
-        <button
-          class="nav-open-btn"
-          aria-label="toggle menu"
-          data-navbar-toggle-btn>
-          <ion-icon
-            name="menu-outline"
-            aria-hidden="true"
-            class="menu-icon"></ion-icon>
-          <ion-icon
-            name="close-outline"
-            aria-hidden="true"
-            class="close-icon"></ion-icon>
-        </button>
-
         <!-- Overlay untuk menutup navbar di perangkat mobile -->
         <div class="overlay" data-overlay></div>
       </div>
@@ -50,7 +27,7 @@
     <main>
       <article>
         <!-- HERO -->
-        <section class="section hero" aria-label="hero">
+        <section class="section hero" id="home" aria-label="hero">
           <div class="container">
             <div class="hero-content">
               <h1 class="h1 title hero-title">
@@ -77,6 +54,7 @@
         <!-- Pengertian -->
         <section
           class="section pengertian text-center"
+          id="about"
           aria-labelledby="pengertian-label">
           <div class="container">
             <figure class="pengertian-banner">
@@ -125,13 +103,11 @@
                     src="{{ url_for('static', filename='image/penyakit-1.jpg') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Aritmia</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Aritmia adalah gangguan ritme jantung yang menyebabkan
+                      detak jantung tidak teratur akibat masalah pada sistem
+                      konduksi listrik jantung
                     </p>
                   </div>
                 </div>
@@ -140,16 +116,14 @@
               <li>
                 <div class="card">
                   <img
-                    src="{{ url_for('static', filename='image/penyakit-2.jpg') }}"
+                    src="{{ url_for('static', filename='image/penyakit-2.png') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Gagal Jantung Kongestif</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Gagal Jantung Kongestif adalah kondisi kronis dimana
+                      jantung tidak dapat memompa darah dnegan efektif, sehingga
+                      cairan menumpuk di paru-paru dan tubuh
                     </p>
                   </div>
                 </div>
@@ -161,13 +135,11 @@
                     src="{{ url_for('static', filename='image/penyakit-3.png') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Jantung Bawaan</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Jantung Bawaan merupakan kelaian struktural jantung yang
+                      sudah ada sejak lahir, sering karena perkembangan yang
+                      tidak sempurna saat janin
                     </p>
                   </div>
                 </div>
@@ -176,16 +148,14 @@
               <li>
                 <div class="card">
                   <img
-                    src="{{ url_for('static', filename='image/penyakit-4.jpg') }}"
+                    src="{{ url_for('static', filename='image/penyakit-4.png') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Gangguan Pembuluh Darah</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Gangguan pembuluh darah mempengaruhi arteri dan vena,
+                      menghambat aliran darah ke ekstremitas, memicu komplikasi
+                      akibat terganggunya aliran darah.
                     </p>
                   </div>
                 </div>
@@ -194,16 +164,14 @@
               <li>
                 <div class="card">
                   <img
-                    src="{{ url_for('static', filename='image/penyakit-5.jpg') }}"
+                    src="{{ url_for('static', filename='image/penyakit-5.png') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Penyakit Katup Jantung</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Penyakit Katup Jantung melibatkan gangguan pada katup
+                      jantung yang dapat menyebabkan penghambatan pada aliran
+                      darah melalui jantung
                     </p>
                   </div>
                 </div>
@@ -212,16 +180,30 @@
               <li>
                 <div class="card">
                   <img
-                    src="{{ url_for('static', filename='image/penyakit-6.jpg') }}"
+                    src="{{ url_for('static', filename='image/penyakit-6.png') }}"
                     alt="Card Image" />
                   <div class="card-content">
-                    <h2>Card Heading</h2>
+                    <h2>Jantung Koroner</h2>
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Nesciunt exercitationem iste, voluptatum, quia explicabo
-                      laboriosam rem adipisci voluptates cumque, veritatis atque
-                      nostrum corrupti ipsa asperiores harum? Dicta odio aut
-                      hic.
+                      Jantung Koroner terjadi akibat penyempitan atau
+                      penyumbatan pada arteri koroner yang mengurangi aliran
+                      darah ke otot jantung
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li id="center-card">
+                <div class="card">
+                  <img
+                    src="{{ url_for('static', filename='image/penyakit-7.png') }}"
+                    alt="Card Image" />
+                  <div class="card-content">
+                    <h2>Kardiomiopati</h2>
+                    <p>
+                      Kardiomiopati adalah penyakit jantung yang disebabkan oleh
+                      kelainan pada otot jantung, sehingga jantung kesulitan
+                      memompa darah ke seluruh tubuh.
                     </p>
                   </div>
                 </div>
@@ -229,14 +211,11 @@
             </ul>
           </div>
         </section>
-
-        <!-- Team -->
-        <footer class="footer"></footer>
       </article>
     </main>
 
     <!-- Script untuk Navbar Toggle -->
-    <script src="./assets/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <!-- ionicon -->
     <script

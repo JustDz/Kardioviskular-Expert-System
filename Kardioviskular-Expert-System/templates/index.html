@@ -13,6 +13,24 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/index.css') }}" />
   </head>
+  <style>
+    .auto-fill-btn {
+      top: 10px;
+      right: 10px;
+      background-color: hsla(260, 62%, 11%, 1);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .auto-fill-btn:hover {
+      background-color: #3583d6;
+    }
+  </style>
   <body>
     <div class="container">
       <h1>Form Diagnosa Penyakit</h1>
@@ -21,24 +39,27 @@
       <div class="page-info">Halaman {{ page }} dari {{ total_pages }}</div>
 
       <!-- Form Diagnosa -->
-      <form action="{{ url_for('diagnose_route') }}" method="POST">
+      <form
+        id="symptoms-form"
+        action="{{ url_for('index', page=page+1 if page < total_pages else page) }}"
+        method="POST"
+        onsubmit="return validateForm()">
         {% for gejala_code, gejala_name in symptoms %}
         <div class="form-group">
-          <label
-            for="{{ gejala_code }}"
-            class="disease-label {{ gejala_code }}">
+          <label for="{{ gejala_code }}">
             {{ loop.index + (page - 1) * items_per_page }}. Merasakan {{
-            gejala_name }} ?
+            gejala_name }}?
           </label>
-
           <div class="radio-buttons-container">
-            {% for value, label in [(0, 'Tidak ada'), (1, 'Sangat Ringan'), (2,
-            'Ringan'), (3, 'Cukup'), (4, 'Berat'), (5, 'Sangat Berat')] %}
+            {% for value, label in [(0, 'Tidak tahu'), (1, 'Hampir mungkin'),
+            (2, 'Mungkin'), (3, 'Cukup Yakin'), (4, 'Yakin'), (5, 'Sangat
+            Yakin')] %}
             <div class="radio-button">
-              <input name="{{ gejala_code }}" id="{{ gejala_code }}-radio{{
-              value }}" class="radio-button__input" type="radio" value="{{ value
-              }}" {% if request.form[gejala_code] == value|string %} checked {%
-              endif %} />
+              <input type="radio" name="{{ gejala_code }}" id="{{ gejala_code
+              }}-radio{{ value }}" value="{{ value }}"
+              class="radio-button__input" {% if gejala_code in previous_data and
+              previous_data[gejala_code] == value|string %} checked {% endif %}
+              />
               <label
                 for="{{ gejala_code }}-radio{{ value }}"
                 class="radio-button__label">
@@ -49,24 +70,89 @@
             {% endfor %}
           </div>
         </div>
+        {% endfor %} {% for key, value in previous_data.items() %}
+        <input type="hidden" name="{{ key }}" value="{{ value }}" />
         {% endfor %}
-
-        <input type="hidden" name="previous_data" value="{{ session.get('user_data', '') }}" />
 
         <!-- Menampilkan tombol Previous dan Next -->
         <div class="pagination">
           {% if page > 1 %}
-          <a href="{{ url_for('index', page=page-1) }}">Kembali</a>
+          <button
+            type="button"
+            class="page-btn"
+            onclick="window.location='{{ url_for('index', page=page-1) }}'">
+            Kembali
+          </button>
           {% else %}
-          <a href="#" class="disabled">Kembali</a>
+          <button type="button" disabled class="page-btn disabled">
+            Kembali
+          </button>
           {% endif %} {% if page < total_pages %}
-          <a href="{{ url_for('index', page=page+1) }}">Berikutnya</a>
+          <button type="submit" class="page-btn">Berikutnya</button>
           {% else %}
-          <!-- Gantikan tombol Next dengan tombol Submit pada halaman terakhir -->
-          <button type="submit">SUBMIT</button>
+          <button
+            type="submit"
+            class="submit-btn"
+            formaction="{{ url_for('diagnose_route') }}">
+            Submit
+          </button>
           {% endif %}
         </div>
       </form>
     </div>
+
+    <!-- Button untuk mengisi otomatis radio buttons -->
+    <button class="auto-fill-btn" onclick="autoFill()">AutoFill</button>
+
+    <script>
+      // Fungsi untuk validasi dan menghilangkan highlight jika radio sudah diisi
+      function validateForm() {
+        const form = document.getElementById("symptoms-form");
+        const radioGroups = form.querySelectorAll(".radio-buttons-container");
+        let allValid = true;
+
+        radioGroups.forEach((group) => {
+          const radios = group.querySelectorAll('input[type="radio"]');
+          const isChecked = Array.from(radios).some((radio) => radio.checked);
+
+          if (!isChecked) {
+            allValid = false;
+            group.style.border = "2px solid red"; // Highlight merah jika belum diisi
+            group.style.borderRadius = "5px";
+          } else {
+            group.style.border = ""; // Hapus highlight jika valid
+          }
+        });
+
+        if (!allValid) {
+          alert("Harap isi semua gejala sebelum melanjutkan.");
+        }
+
+        return allValid; // Mencegah form submit jika ada yang tidak valid
+      }
+
+      // Menambahkan event listener untuk menghilangkan highlight ketika radio dipilih
+      document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          const radioGroup = this.closest(".radio-buttons-container");
+          radioGroup.style.border = ""; // Hapus border highlight ketika diubah
+        });
+      });
+
+      // Fungsi untuk mengisi radio secara acak
+      function autoFill() {
+        const radioGroups = document.querySelectorAll(
+          ".radio-buttons-container"
+        );
+
+        radioGroups.forEach((group) => {
+          const radios = group.querySelectorAll('input[type="radio"]');
+          const randomIndex = Math.floor(Math.random() * radios.length); // Pilih acak
+
+          // Centang radio button secara acak
+          radios[randomIndex].checked = true;
+        });
+      }
+    </script>
   </body>
 </html>

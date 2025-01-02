@@ -1,60 +1,70 @@
 P01 - Jantung Koroner
-G01: Nyeri Dada - 0.8
-G02: Keringat Dingin - 0.6
-G03: Nyeri Ulu Hati - 0.4
-G04: Penurunan Kesadaran - 0.6
-G05: Denyut Nadi Lemah - 0.6
-G06: Sesak Nafas - 0.4
-G07: Pusing - 0.2
-G08: Mual/Muntah - 0.4
+G01: Nyeri Dada - 0.9
+G02: Keringat Dingin - 0.9
+G03: Nyeri Ulu Hati - 0.6
+G04: Penurunan Kesadaran - 0.5
+G05: Denyut Nadi Lemah - 0.7
+G06: Sesak Nafas - 0.8
+G07: Pusing - 0.5
+G08: Mual/Muntah - 0.6
+G30: Diare - 0.5
 
 P02 - Gagal Jantung Kongestif
-G06: Sesak Nafas - 0.8
-G09: Kaki Bengkak - 0.6
-G10: Perut Membesar - 0.4
-G08: Mual/Muntah - 0.4
-G01: Nyeri Dada - 0.4
-G04: Penurunan Kesadaran - 0.2
-G11: Sesak Saat Malam Hari - 0.6
-G12: Posisi Tidur 2 Bantal - 0.8
-G17: Mudah Lelah - 0.6
+G06: Sesak Nafas - 0.9
+G09: Kaki Bengkak - 0.7
+G10: Perut Membesar - 0.7
+G08: Mual/Muntah - 0.7
+G01: Nyeri Dada - 0.8
+G04: Penurunan Kesadaran - 0.8
+G11: Sesak Saat Malam Hari - 0.9
+G17: Mudah Lelah - 0.9
+G31: Batuk - 0.7
 
 P03 - Katup Jantung
-G13: Berdebar - 0.4
-G06: Sesak Nafas - 0.6
-G14: Batuk Berdarah - 0.4
-G11: Sesak Saat Malam Hari - 0.6
-G17: Mudah Lelah - 0.6
-G09: Kaki Bengkak - 0.6
-G04: Penurunan Kesadaran - 0.4
+G13: Berdebar - 0.9
+G06: Sesak Nafas - 0.9
+G14: Batuk Berdarah - 0.5
+G11: Sesak Saat Malam Hari - 0.8
+G17: Mudah Lelah - 0.8
+G09: Kaki Bengkak - 0.7
+G04: Penurunan Kesadaran - 0.7
+G32: Pilek - 0.5
 
 P04 - Aritmia
-G13: Berdebar - 0.8
-G07: Pusing - 0.4
+G13: Berdebar - 0.9
+G07: Pusing - 0.75
 G17: Mudah Lelah - 0.6
-G04: Penurunan Kesadaran - 0.6
-G06: Sesak Nafas - 0.4
-G15: Nadi Tidak Teraba - 0.8
-G16: Nadi Tidak Teratur - 0.8
+G04: Penurunan Kesadaran - 0.8
+G06: Sesak Nafas - 0.75
+G15: Nadi Tidak Teraba - 0.75
+G16: Nadi Tidak Teratur - 1
 
 P05 - Jantung Bawaan
-G06: Sesak Nafas - 0.6
-G18: Bibir Membiru - 0.8
-G19: Bagian Bawah Kuku Membiru - 0.8
-G17: Mudah Lelah - 0.4
-G20: Infeksi Saluran Nafas Berulang - 0.6
-G21: Sulit menyusui pada bayi - 0.8
+G06: Sesak Nafas - 0.9
+G18: Bibir Membiru - 0.9
+G19: Bagian Bawah Kuku Membiru - 1
+G17: Mudah Lelah - 0.5
+G20: Infeksi Saluran Nafas Berulang - 0.8
+G21: Sulit menyusui pada bayi - 0.9
+G33: Berat Badan Berkurang - 0.8
 
 P06 - Pembuluh Darah
 G09: Kaki Bengkak - 0.6
-G22: Nyeri pada Tangan/Kaki - 0.6
+G22: Nyeri pada Tangan/Kaki - 0.8
 G23: Kaki/Tangan Memerah - 0.8
 G24: Kaki/Tangan Membiru - 0.8
-G25: Kaki/Tangan Terasa Panas - 0.8
-G26: Kaki/Tangan Terasa Dingin - 0.8
-G27: Luka pada Kaki/Tangan Sulit Sembuh - 0.8
-G28: Kesemutan pada Kaki/Tangan - 0.6
-G29: Pandangan Kabur - 0.4
-G01: Nyeri Dada - 0.4
+G25: Kaki/Tangan Terasa Panas - 0.5
+G26: Kaki/Tangan Terasa Dingin - 0.6
+G27: Luka pada Kaki/Tangan Sulit Sembuh - 0.85
+G28: Kesemutan pada Kaki/Tangan - 0.85
+G29: Pandangan Kabur - 0.6
+G01: Nyeri Dada - 0.6
 G07: Pusing - 0.4
-G04: Penurunan Kesadaran - 0.6
+G04: Penurunan Kesadaran - 0.4
+G15: Mudah Lelah - 0.5
+
+P07 - Cardiomyopathy
+G06: Sesak Nafas - 0.9
+G17: Mudah Lelah - 0.5
+G09: Kaki Bengkak - 0.6
+G10: Perut Membesar - 0.7

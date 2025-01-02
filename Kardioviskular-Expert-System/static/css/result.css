@@ -82,10 +82,9 @@ body {
 /* Container Styles */
 
 /* Customize scrollbar for .card */
-/* Customize scrollbar for .card */
 .card::-webkit-scrollbar {
-  width: 6px; /* Set width for vertical scrollbar */
-  height: 6px; /* Set height for horizontal scrollbar */
+  width: 6px;
+  height: 6px;
 }
 
 .card::-webkit-scrollbar-track {
@@ -136,7 +135,7 @@ body {
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 1rem;
-  padding: 2rem 3rem;
+  padding: 3rem 4rem;
   z-index: 10;
   color: white;
   overflow-y: auto; /* Enable scrolling inside the card if content exceeds the height */
@@ -167,8 +166,8 @@ body {
 }
 
 .penyakit-utama .percentage {
-  font-size: 1.7rem; 
-  color: var(--bg-sunglow); 
+  font-size: 1.7rem;
+  color: var(--bg-sunglow);
   margin-left: 10px;
   font-weight: bold;
 }
@@ -191,6 +190,7 @@ body {
 }
 
 .suggestions {
+  display: block;
   margin-top: 2rem;
   text-align: left;
 }
@@ -203,7 +203,8 @@ body {
 }
 
 .suggestions ol {
-  list-style-type: decimal;}
+  list-style-type: decimal;
+}
 
 .suggestions ol li {
   font-size: 1rem;
@@ -226,9 +227,9 @@ body {
 }
 
 .button-container {
-  display: flex; 
-  justify-content: center; 
-  margin-top: 50px; 
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 

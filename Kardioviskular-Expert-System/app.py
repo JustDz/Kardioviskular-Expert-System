@@ -98,57 +98,41 @@ def index():
     if not knowledge_base:
         return "Error: File knowledge base tidak ditemukan atau kosong."
 
+    # Membuat daftar gejala
     symptoms = {}
     for penyakit_data in knowledge_base.values():
         for gejala_code, gejala_data in penyakit_data['symptoms'].items():
             if gejala_code not in symptoms:
                 symptoms[gejala_code] = gejala_data['name']
 
+    # Menentukan gejala per halaman
     symptoms_list = list(symptoms.items())
     items_per_page = 10
     page = int(request.args.get('page', 1))
     start = (page - 1) * items_per_page
     end = start + items_per_page
-
     page_symptoms = symptoms_list[start:end]
 
     total_pages = len(symptoms_list) // items_per_page + (1 if len(symptoms_list) % items_per_page > 0 else 0)
 
-    # if 'user_data' not in session:
-    #     session['user_data'] = {}
-        
-    # if request.method == 'POST':
-    #     form_data = request.form
-    #     for key, value in form_data.items():
-    #         session['user_data'][key] = value
-    #     print("data yang disimpan di session:", session['user_data'])
+    # Menggabungkan data gejala sebelumnya dari session
+    if 'user_data' not in session:
+        session['user_data'] = {}
 
-    
+    if request.method == 'POST':
+        # Menggabungkan data dari halaman sebelumnya dengan data saat ini
+        form_data = request.form.to_dict()
+        session['user_data'].update(form_data)
+        session.modified = True  # Tandai session sebagai dimodifikasi
+
     return render_template(
         'index.html',
         symptoms=page_symptoms,
         page=page,
         total_pages=total_pages,
-        items_per_page=items_per_page
+        items_per_page=items_per_page,
+        previous_data=session['user_data'],  # Mengirim data sebelumnya ke template
     )
-
-# @app.route('/diagnose', methods=['POST'])
-# def diagnose_route():
-#     knowledge_base = load_knowledge_base_from_file()
-#     if not knowledge_base:
-#         return "Error: Tidak dapat memuat knowledge base."        
-#     print("request from data:", request.form)
-#     gejala_user = {}
-#     for symptom_code in request.form:
-#         try:
-#             user_input = int(request.form[symptom_code])
-#             gejala_user[symptom_code] = user_input  # Menyimpan CF yang dipilih
-#         except ValueError:
-#             gejala_user[symptom_code] = 0  # Jika input tidak valid
-            
-#     print("gejala yang dipilih oleh user", gejala_user)
-
-#     return render_template('result.html', gejala_user=gejala_user)
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose_route():
@@ -156,27 +140,19 @@ def diagnose_route():
     if not knowledge_base:
         return "Error: Tidak dapat memuat knowledge base."
 
-    # Gabungkan data dari session (data yang diterima dari halaman sebelumnya)
-    gejala_user = {}
-    previous_data = request.form.get('previous_data', '')  # Ambil data sebelumnya dari hidden field
+    # Ambil semua data gejala dari session
+    gejala_user = session.get('user_data', {})
+    
+    # Konversi nilai gejala ke bentuk yang dapat diproses
+    gejala_user_cf = {key: get_user_cf(int(value)) for key, value in gejala_user.items()}
 
-    # Jika ada data sebelumnya, gabungkan dengan data yang baru
-    if previous_data:
-        gejala_user.update(eval(previous_data))  # Konversi string kembali ke dictionary
+    # Lakukan diagnosis
+    diagnosis_results = diagnose(gejala_user_cf, knowledge_base)
 
-    # Proses data yang dikirimkan di halaman ini
-    for symptom_code in request.form:
-        if symptom_code != 'previous_data':  # Jangan proses hidden field
-            try:
-                user_input = int(request.form[symptom_code])
-                gejala_user[symptom_code] = user_input  # Simpan CF yang dipilih
-            except ValueError:
-                gejala_user[symptom_code] = 0  # Jika input tidak valid
+    # Hapus data dari session setelah diagnosis selesai
+    session.pop('user_data', None)
 
-    print("Gejala yang dipilih oleh user:", gejala_user)
-
-    return render_template('result.html', gejala_user=gejala_user)
-
+    return render_template('result.html', diagnosis_results=diagnosis_results)
 
 if __name__ == '__main__':
     app.run(debug=True)

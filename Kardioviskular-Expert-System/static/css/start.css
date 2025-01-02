@@ -193,6 +193,12 @@ body.nav-active {
   gap: 50px;
 }
 
+#center-card {
+  grid-column: 1 / -1;
+  justify-self: center;
+  align-self: center;
+}
+
 /* ----- HEADER ----- */
 
 .header .btn {
@@ -219,52 +225,6 @@ body.nav-active {
   font-weight: bolder;
   letter-spacing: 1.2px;
   color: var(--text-white);
-}
-
-.nav-open-btn {
-  color: var(--text-white);
-  font-size: 3rem;
-}
-
-.nav-open-btn .menu-icon,
-.nav-open-btn .close-icon {
-  display: none;
-}
-
-.nav-open-btn:not(.active) .menu-icon {
-  display: block;
-}
-
-.nav-open-btn.active .close-icon {
-  display: block;
-}
-
-.navbar {
-  position: absolute;
-  top: 100%;
-  right: 16px;
-  background-color: var(--bg-vivid-violet);
-  color: var(--text-white);
-  padding: 16px 30px;
-  border-radius: var(--radius-24);
-  opacity: 0;
-  visibility: hidden;
-  transition: 500ms var(--cubic-out);
-  z-index: 1;
-}
-
-.navbar.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(-15px);
-}
-
-.navbar-list > li:not(:last-child) {
-  margin-block-end: 5px;
-}
-
-.navbar-link {
-  font-weight: var(--weight-medium);
 }
 
 .overlay {
@@ -410,6 +370,7 @@ body.nav-active {
 .card {
   width: 24rem;
   height: 36rem;
+  margin-top: 40px;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
@@ -437,6 +398,7 @@ body.nav-active {
     transition: inset 0.3s 0.3s ease-out;
     text-transform: uppercase;
     font-size: var(--fontSize-6);
+    text-shadow: 2px 2px 5px #000;
   }
 
   p {
@@ -444,12 +406,12 @@ body.nav-active {
     opacity: 0;
     max-width: 80%;
     transition: opacity 0.3s ease-out;
-    inset: auto auto 80px 30px;
-    font-size: 1rem;
+    inset: auto auto 60px 30px;
+    font-size: 1.2rem;
   }
 
   &:hover h2 {
-    inset: auto auto 200px 30px;
+    inset: auto auto 180px 30px;
     transition: inset 0.3s ease-out;
   }
 
@@ -540,42 +502,8 @@ body.nav-active {
     padding-inline: 40px;
   }
 
-  body.nav-active {
-    overflow: auto;
-  }
-
-  .nav-open-btn,
-  .overlay {
-    display: none;
-  }
-
   .header .logo {
     width: max-content;
-  }
-
-  .navbar,
-  .navbar.active {
-    all: unset;
-    margin-inline-start: 80px;
-  }
-
-  .navbar-list {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .navbar-list > li:not(:last-child) {
-    margin-block-end: 0;
-  }
-
-  .navbar-link {
-    color: var(--text-white);
-    transition: var(--transition-1);
-  }
-
-  .navbar-link:is(:hover, :focus-visible) {
-    color: var(--text-white-alpha-60);
   }
 
   .hero .container {

@@ -65,9 +65,21 @@
                 30
                 %}
                 style="color: rgb(36, 207, 50)"
-                {% elif percentage < 60 %} style="color: var(--bg-sunglow);"
-                {% else %} style="color: rgb(218, 14, 14);"
-                {% endif %}> {{ percentage }}%
+                {%
+                elif
+                percentage
+                <
+                60
+                %}
+                style="color: var(--bg-sunglow)"
+                {%
+                else
+                %}
+                style="color: rgb(218, 14, 14)"
+                {%
+                endif
+                %}>
+                {{ percentage }}%
               </span>
             </li>
             {% endfor %}
@@ -82,90 +94,117 @@
           {% if diagnosis_results[0][0] == "Jantung Koroner" %}
           <ol>
             <li>
-              Segera konsultasikan dengan dokter untuk pemeriksaan lebih lanjut.
+              Konsumsilah makanan yang rendah lemak jenuh, garam, dan
+              kolesterol. Perbanyak makan sayuran, buah, biji-bijian, dan ikan.
             </li>
             <li>
-              Hindari aktivitas fisik yang berat dan pastikan Anda cukup
-              istirahat.
+              Lakukanlah olahraga ringan seperti jalan kaki, berenang, atau yoga
+              secara teratur setiap hari
             </li>
+            <li>Kelola stres anda dengan meditasi, hobi, atau konseling.</li>
             <li>
-              Segera periksakan jantung Anda dengan tes EKG untuk memastikan
-              kondisi lebih lanjut.
+              Jika Anda merokok, segera berhenti merokok untuk mengurangi risiko
+              komplikasi pada penyakit anda.
             </li>
-            <li>
-              Perhatikan pola makan, kurangi konsumsi garam dan lemak jenuh.
-            </li>
+            <li>Pergilah ke dokter terdekat jika sakit masih berlanjut</li>
           </ol>
           {% elif diagnosis_results[0][0] == "Gagal Jantung Kongestif" %}
           <ol>
-            <li>Segera hubungi dokter untuk evaluasi jantung Anda.</li>
+            <li>Kurangi konsumsi makanan tinggi garam dan lemak.</li>
             <li>
-              Pastikan posisi tidur dengan dua bantal untuk membantu pernapasan.
+              Olahraga teratur, setidaknya 30 menit dalam sehari sebanyak lima
+              hari seminggu.
             </li>
+            <li>Kelola stres dengan baik.</li>
+            <li>Berhenti merokok dan minum alkohol.</li>
             <li>
-              Periksa dan kontrol pembengkakan pada kaki untuk menghindari
-              komplikasi lebih lanjut.
-            </li>
-            <li>
-              Batasi asupan garam dalam diet Anda untuk menghindari
-              pembengkakan.
+              Rutin medical check up untuk memantau kondisi kesehatan secara
+              menyeluruh.
             </li>
           </ol>
           {% elif diagnosis_results[0][0] == "Katup Jantung" %}
           <ol>
             <li>
-              Lakukan pemeriksaan dengan dokter spesialis jantung untuk
-              memastikan kondisi katup jantung.
+              Lebih aktif secara fisik, contohnya dengan berolahraga rutin
+              selama 30 menit setiap harinya.
+            </li>
+            <li>Mengonsumsi makanan sehat kaya nutrisi.</li>
+            <li>Menjaga berat badan ideal.</li>
+            <li>
+              Mengonsumsi obat tekanan darah tinggi dan kolesterol tinggi untuk
+              mengontrol penyakit.
             </li>
             <li>
-              Perhatikan gejala batuk berdarah, ini dapat menjadi indikasi
-              serius.
+              Berhenti merokok atau menggunakan produk yang mengandung tembakau.
             </li>
             <li>
-              Cobalah tidur dengan posisi lebih tinggi agar pernapasan lebih
-              lancar.
+              Menerapkan kebersihan gigi dan mulut, untuk mencegah infeksi
+              pemicu penyakit katup jantung
             </li>
           </ol>
           {% elif diagnosis_results[0][0] == "Aritmia" %}
           <ol>
             <li>
-              Periksa ritme jantung Anda dengan alat EKG untuk mendeteksi
-              kelainan irama jantung.
+              Kurangi konsumsi kafein, alkohol, dan stres yang dapat memicu
+              kambuhnya penyakit aritmia
             </li>
-            <li>Hindari stres yang berlebihan dan perbanyak istirahat.</li>
             <li>
-              Jika Anda merasa pusing atau kehilangan kesadaran, segera cari
-              bantuan medis.
+              Lakukan olahraga yang ringan, tetapi konsultasikanlah dengan
+              dokter terlebih dahulu.
             </li>
+            <li>
+              Mengurangi makanan yang tinggi lemak seperti es krim, susu
+              full-cream dan juga santan
+            </li>
+            <li>Meningkatkan konsumsi sayur-sayuran dan buah-buahan</li>
           </ol>
           {% elif diagnosis_results[0][0] == "Jantung Bawaan" %}
           <ol>
             <li>
-              Segera konsultasikan dengan dokter spesialis jantung anak (untuk
-              bayi) atau jantung dewasa untuk pemeriksaan lebih lanjut.
+              Lakukan kunjungan rutin ke dokter jantung khusus anak atau dewasa.
             </li>
             <li>
-              Pastikan bayi Anda mendapatkan perawatan yang tepat untuk masalah
-              pernapasan.
+              Jaga pola hidup sehat anda dengan makanan bergizi dan aktivitas
+              fisik ringan.
             </li>
             <li>
-              Perhatikan tanda-tanda kebiruan pada bibir atau kuku, dan segera
-              bawa ke rumah sakit jika perlu.
+              Segera temui dokter anda jika telah muncul gejala seperti
+              kelelahan ekstrem atau napas pendek.
             </li>
           </ol>
           {% elif diagnosis_results[0][0] == "Pembuluh Darah" %}
           <ol>
             <li>
-              Lakukan pemeriksaan pada sistem peredaran darah Anda, terutama
-              jika mengalami pembengkakan atau kesemutan.
+              Kurangi konsumsi lemak jenuh dan tingkatkan asupan omega-3 seperti
+              ikan.
             </li>
             <li>
-              Jika luka pada kaki atau tangan sulit sembuh, segera periksakan ke
-              dokter untuk kemungkinan adanya gangguan peredaran darah.
+              Jika bekerja dalam posisi duduk, lakukanlah peregangan atau
+              berjalan singkat secara berkala.
             </li>
             <li>
-              Kurangi konsumsi garam dan perbanyak makan makanan yang baik untuk
-              pembuluh darah.
+              Pantau tekanan darah anda secara rutin dan minum obat jika telah
+              diresepkan.
+            </li>
+            <li>
+              Berhentilah merokok atau menghisap asap rokok untuk menjaga
+              kesehatan pembuluh darah.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Cardiomyopathy" %}
+          <ol>
+            <li>
+              Kelola stres melalui teknik seperti meditasi, yoga, atau
+              pernapasan dalam dapat membantu menjaga kesehatan jantung.
+            </li>
+            <li>
+              Hindari olahraga berat yang dapat memperburuk kondisi jantung
+              anda.
+            </li>
+            <li>
+              Perhatikanlah tanda-tanda seperti napas pendek, kelelahan, atau
+              bengkak di kaki jika muncul setiap hari. Jika terjadi tanda
+              tersebut terus berulang segera pergilah ke dokter.
             </li>
           </ol>
           {% endif %}
