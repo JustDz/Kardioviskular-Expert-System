@@ -103,14 +103,10 @@ h1 {
 
 .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 50px auto;
+  padding: 40px 20px;
   border-radius: 8px;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.1)
-  );
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -122,15 +118,13 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px; /* Perbesar jarak antar pertanyaan */
-  padding-bottom: 15px; /* Tambahkan padding bawah jika diperlukan */
-  border-bottom: 1px solid #ddd; /* Opsional: Tambahkan garis bawah untuk memisahkan */
+  padding: 40px 0;
+  border-bottom: 1px solid #ddd;
 }
 
 .form-group label {
   flex: 2;
   margin-right: 20px;
-  font-size: 1rem;
 }
 
 .form-group .disease-label {
@@ -144,21 +138,63 @@ h1 {
   gap: 15px;
 }
 
-.radio-label {
-  height: 50px; /* Tinggi kontainer tetap */
-  display: flex; /* Mengaktifkan Flexbox */
-  justify-content: center; /* Menyejajarkan secara horizontal */
-  align-items: center; /* Menyejajarkan secara vertikal */
-  text-align: center;
+.radio-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.radio-group {
-  height: 50px; /* Tinggi kontainer tetap */
-  flex: 2; /* Fleksibilitas untuk tata letak */
-  display: flex; /* Mengaktifkan Flexbox */
-  justify-content: center; /* Menyejajarkan secara horizontal */
-  align-items: center; /* Menyejajarkan secara vertikal */
-  text-align: center; /* Menjaga teks tetap rata tengah (opsional) */
+.radio-button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-button__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-button__label {
+  display: inline-block;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  position: relative;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.radio-button__custom {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #555;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.radio-button__input:checked + .radio-button__label .radio-button__custom {
+  transform: translateY(-50%) scale(0.9);
+  border: 5px solid #4c8bf5;
+  color: #4c8bf5;
+  box-shadow: 0 0 15px #4c8bf5, 0 0 20px #4c8bf5, 0 0 35px #4c8bf5;
+}
+
+.radio-button__input:checked + .radio-button__label {
+  color: #4c8bf5;
+}
+
+.radio-button__label:hover .radio-button__custom {
+  transform: translateY(-50%) scale(1.2);
+  border-color: #4c8bf5;
+  box-shadow: 0 0 10px #4c8bf580;
 }
 
 .form-group input[type="radio"] {
@@ -168,45 +204,61 @@ h1 {
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  height: 10vh;
 }
 
 .pagination a {
-  padding: 12px 20px;
-  margin: 0 10px;
+  text-align: center;
+  width: 150px;
+  padding: 10px 20px;
+  margin: 8px 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   text-decoration: none;
-  font-size: 1rem;
-  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.8rem;
+  transition: 0.3s, color 0.3s;
+  box-sizing: border-box;
+  transform: scale(0.9);
+  transform-origin: center;
 }
 
 .pagination a:hover {
-  background-color: #007bff;
+  transform: scale(1);
+  border: 3px solid;
+  border-color: #4c8bf5;
+  box-shadow: 0 0 25px #4c8bf580;
   color: white;
 }
 
 .pagination a.disabled {
-  color: #ccc;
-  border-color: #ccc;
+  color: #6c6c6c;
+  border-color: #6f6f6f;
   pointer-events: none;
 }
 
 button[type="submit"] {
-  background-color: #007bff;
-  color: white;
+  font-family: "Nunito", serif;
+  font-weight: 600;
+  background-color: #006de1;
+  width: 150px;
   padding: 10px 20px;
-  border: none;
+  margin: 5px 10px;
+  border: 1px solid #006de1;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.8rem;
+  transition: 0.3s, color 0.3s;
+  box-sizing: border-box;
+  transform: scale(0.9);
+  transform-origin: center;
   cursor: pointer;
-  width: 100%;
-  margin-top: 20px;
-  transition: background-color 0.3s;
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #002c5a;
+  box-shadow: 0 0 25px #4c8bf580;
+  color: white;
+  border: 3px solid #006de1;
 }
 
 .page-info {

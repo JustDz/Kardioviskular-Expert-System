@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
+import secrets
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex(24)
 
 # Fungsi untuk menghitung Certainty Factor (CF)
 def calculate_cf(user_cf, expert_cf):
@@ -21,10 +23,7 @@ def get_user_cf(choice):
 # Fungsi untuk membaca knowledge base dari file di direktori data
 def load_knowledge_base_from_file():
     knowledge_base = {}
-    # Tentukan path absolut untuk file knowledge base dalam direktori "data"
     file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "knowledge_bases.txt"))
-    
-    print(f"Mencoba memuat file knowledge base dari path: {file_path}")
     
     try:
         with open(file_path, 'r') as file:
@@ -33,19 +32,22 @@ def load_knowledge_base_from_file():
                 line = line.strip()
                 if not line:
                     continue
-                if line.startswith("P"):  # Baris yang memulai kode penyakit
+                if line.startswith("P"):
                     penyakit_code, penyakit_name = line.split(" - ")
                     knowledge_base[penyakit_code] = {'name': penyakit_name, 'symptoms': {}}
-                elif line.startswith("G"):  # Baris yang memulai kode gejala
+                elif line.startswith("G"):
                     gejala_code, rest = line.split(": ")
                     gejala_name, weight = rest.split(" - ")
-                    knowledge_base[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
+                    if penyakit_code:
+                        knowledge_base[penyakit_code]['symptoms'][gejala_code] = {'name': gejala_name, 'weight': float(weight)}
         print("Knowledge base berhasil dimuat.")
     except FileNotFoundError:
-        print(f"File {file_path} tidak ditemukan. Pastikan file berada di direktori 'data' dan bernama 'knowledge_bases.txt'.")
+        print(f"File {file_path} tidak ditemukan.")
     except Exception as e:
         print("Terjadi error saat membaca knowledge base:", e)
+    
     return knowledge_base
+
 
 # Fungsi untuk melakukan diagnosa
 def diagnose(gejala_user, knowledge_base):
@@ -77,8 +79,13 @@ def diagnose(gejala_user, knowledge_base):
 def process_user_input(form_data):
     gejala_user = {}
     for symptom_code in form_data:
-        user_input = int(form_data[symptom_code])
-        gejala_user[symptom_code] = get_user_cf(user_input)
+        try:
+            user_input = int(form_data[symptom_code])  # Pastikan nilai yang diterima adalah integer
+            gejala_user[symptom_code] = get_user_cf(user_input)  # Ubah ke CF
+        except ValueError:
+            print(f"Invalid input for {symptom_code}: {form_data[symptom_code]}")
+            gejala_user[symptom_code] = 0  # Jika input tidak valid, atur CF ke 0
+    print("Gejala user:", gejala_user)  # Debugging untuk memastikan nilai gejala
     return gejala_user
 
 @app.route('/')
@@ -87,7 +94,6 @@ def start():
 
 @app.route('/diagnosa', methods=['GET', 'POST'])
 def index():
-    # Muat knowledge base dan kumpulkan semua gejala unik
     knowledge_base = load_knowledge_base_from_file()
     if not knowledge_base:
         return "Error: File knowledge base tidak ditemukan atau kosong."
@@ -98,48 +104,79 @@ def index():
             if gejala_code not in symptoms:
                 symptoms[gejala_code] = gejala_data['name']
 
-    # Menyusun gejala menjadi list dan membaginya per halaman
-    symptoms_list = list(symptoms.items())  # Mengubah dictionary menjadi list
-    items_per_page = 10  # Menampilkan 10 gejala per halaman (tetapkan ini)
-    page = int(request.args.get('page', 1))  # Halaman yang aktif, default ke 1
-    start = (page - 1) * items_per_page  # Indeks mulai
-    end = start + items_per_page  # Indeks akhir
+    symptoms_list = list(symptoms.items())
+    items_per_page = 10
+    page = int(request.args.get('page', 1))
+    start = (page - 1) * items_per_page
+    end = start + items_per_page
 
-    # Mengambil subset gejala untuk halaman ini
     page_symptoms = symptoms_list[start:end]
 
-    # Total halaman berdasarkan jumlah gejala
     total_pages = len(symptoms_list) // items_per_page + (1 if len(symptoms_list) % items_per_page > 0 else 0)
 
-    # Kirim variabel 'items_per_page' ke template
+    # if 'user_data' not in session:
+    #     session['user_data'] = {}
+        
+    # if request.method == 'POST':
+    #     form_data = request.form
+    #     for key, value in form_data.items():
+    #         session['user_data'][key] = value
+    #     print("data yang disimpan di session:", session['user_data'])
+
+    
     return render_template(
         'index.html',
         symptoms=page_symptoms,
         page=page,
         total_pages=total_pages,
-        items_per_page=items_per_page  # Jangan lupa mengirimkan ini ke template
+        items_per_page=items_per_page
     )
 
+# @app.route('/diagnose', methods=['POST'])
+# def diagnose_route():
+#     knowledge_base = load_knowledge_base_from_file()
+#     if not knowledge_base:
+#         return "Error: Tidak dapat memuat knowledge base."        
+#     print("request from data:", request.form)
+#     gejala_user = {}
+#     for symptom_code in request.form:
+#         try:
+#             user_input = int(request.form[symptom_code])
+#             gejala_user[symptom_code] = user_input  # Menyimpan CF yang dipilih
+#         except ValueError:
+#             gejala_user[symptom_code] = 0  # Jika input tidak valid
+            
+#     print("gejala yang dipilih oleh user", gejala_user)
 
+#     return render_template('result.html', gejala_user=gejala_user)
 
 @app.route('/diagnose', methods=['POST'])
 def diagnose_route():
-    # Muat knowledge base
     knowledge_base = load_knowledge_base_from_file()
     if not knowledge_base:
         return "Error: Tidak dapat memuat knowledge base."
-    
-    # Ambil data dari form
-    gejala_user = process_user_input(request.form)
 
-    # Lakukan diagnosis berdasarkan gejala
-    hasil_diagnosis = diagnose(gejala_user, knowledge_base)
+    # Gabungkan data dari session (data yang diterima dari halaman sebelumnya)
+    gejala_user = {}
+    previous_data = request.form.get('previous_data', '')  # Ambil data sebelumnya dari hidden field
 
-    # Filter hasil diagnosis untuk nilai CF > 0
-    hasil_diagnosis_filtered = [diagnosis for diagnosis in hasil_diagnosis if diagnosis[1] > 0]
+    # Jika ada data sebelumnya, gabungkan dengan data yang baru
+    if previous_data:
+        gejala_user.update(eval(previous_data))  # Konversi string kembali ke dictionary
 
-    # Render halaman hasil diagnosis
-    return render_template('result.html', diagnosis_results=hasil_diagnosis_filtered)
+    # Proses data yang dikirimkan di halaman ini
+    for symptom_code in request.form:
+        if symptom_code != 'previous_data':  # Jangan proses hidden field
+            try:
+                user_input = int(request.form[symptom_code])
+                gejala_user[symptom_code] = user_input  # Simpan CF yang dipilih
+            except ValueError:
+                gejala_user[symptom_code] = 0  # Jika input tidak valid
+
+    print("Gejala yang dipilih oleh user:", gejala_user)
+
+    return render_template('result.html', gejala_user=gejala_user)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

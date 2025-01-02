@@ -24,55 +24,48 @@
       <form action="{{ url_for('diagnose_route') }}" method="POST">
         {% for gejala_code, gejala_name in symptoms %}
         <div class="form-group">
-          <label for="{{ gejala_code }}" class="disease-label {{ gejala_code }}"
-            >{{ loop.index + (page - 1) * items_per_page }}. Merasakan {{
-            gejala_name }} ?</label
-          >
+          <label
+            for="{{ gejala_code }}"
+            class="disease-label {{ gejala_code }}">
+            {{ loop.index + (page - 1) * items_per_page }}. Merasakan {{
+            gejala_name }} ?
+          </label>
 
-          <div class="radio-group">
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="0" /> Tidak
-              ada
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="1" /> Sangat
-              Ringan
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="2" /> Ringan
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="3" /> Cukup
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="4" /> Berat
-            </label>
-            <label class="radio-label">
-              <input type="radio" name="{{ gejala_code }}" value="5" /> Sangat
-              Berat
-            </label>
+          <div class="radio-buttons-container">
+            {% for value, label in [(0, 'Tidak ada'), (1, 'Sangat Ringan'), (2,
+            'Ringan'), (3, 'Cukup'), (4, 'Berat'), (5, 'Sangat Berat')] %}
+            <div class="radio-button">
+              <input name="{{ gejala_code }}" id="{{ gejala_code }}-radio{{
+              value }}" class="radio-button__input" type="radio" value="{{ value
+              }}" {% if request.form[gejala_code] == value|string %} checked {%
+              endif %} />
+              <label
+                for="{{ gejala_code }}-radio{{ value }}"
+                class="radio-button__label">
+                <span class="radio-button__custom"></span>
+                {{ label }}
+              </label>
+            </div>
+            {% endfor %}
           </div>
         </div>
-
         {% endfor %}
+
+        <input type="hidden" name="previous_data" value="{{ session.get('user_data', '') }}" />
 
         <!-- Menampilkan tombol Previous dan Next -->
         <div class="pagination">
           {% if page > 1 %}
-          <a href="{{ url_for('index', page=page-1) }}">Previous</a>
+          <a href="{{ url_for('index', page=page-1) }}">Kembali</a>
           {% else %}
-          <a href="#" class="disabled">Previous</a>
+          <a href="#" class="disabled">Kembali</a>
           {% endif %} {% if page < total_pages %}
-          <a href="{{ url_for('index', page=page+1) }}">Next</a>
+          <a href="{{ url_for('index', page=page+1) }}">Berikutnya</a>
           {% else %}
-          <a href="#" class="disabled">Next</a>
+          <!-- Gantikan tombol Next dengan tombol Submit pada halaman terakhir -->
+          <button type="submit">SUBMIT</button>
           {% endif %}
         </div>
-
-        <!-- Menampilkan tombol SUBMIT hanya pada halaman terakhir -->
-        {% if page == total_pages %}
-        <button type="submit">SUBMIT</button>
-        {% endif %}
       </form>
     </div>
   </body>

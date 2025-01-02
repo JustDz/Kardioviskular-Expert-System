@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hasil Diagnosa</title>
-
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/result.css') }}" />
@@ -15,40 +14,180 @@
       rel="stylesheet" />
   </head>
   <body>
-    <div class="diag-container">
-      <h2>Hasil Diagnosa</h2>
+    <div class="container">
+      <div class="card">
+        <h2 class="title">Hasil Diagnosa</h2>
+        {% if diagnosis_results %}
+        <div class="penyakit-utama">
+          <p class="subtitle">Penyakit yang Anda derita berdasarkan gejala:</p>
+          <div class="nama-penyakit-utama">
+            <strong>{{ diagnosis_results[0][0] }}</strong>
+            {% set percentage = (diagnosis_results[0][1] * 100) | round(2) %}
+            <span
+              class="percentage"
+              {%
+              if
+              percentage
+              <
+              30
+              %}style="color:rgb(36, 207, 50);"
+              {%
+              elif
+              percentage
+              <
+              60
+              %}style="color: var(--bg-sunglow);"
+              {%
+              else
+              %}style="color:rgb(218, 14, 14);"
+              {%
+              endif
+              %}>
+              {{ percentage }}%
+            </span>
+          </div>
+        </div>
 
-      {% if diagnosis_results %}
-      <div class="penyakit-utama">
-        <p>Penyakit yang Anda derita berdasarkan gejala:</p>
-        <ul>
-          <li>
-            <strong>{{ diagnosis_results[0][0] }}:</strong> {{
-            (diagnosis_results[0][1] * 100) | round(2) }}%
-          </li>
-        </ul>
-      </div>
+        {% if diagnosis_results | length > 1 %}
+        <div class="penyakit-lain">
+          <p class="others">Penyakit lain yang mungkin diderita:</p>
+          <ul>
+            {% for penyakit, cf in diagnosis_results[1:] %} {% set percentage =
+            (cf * 100) | round(2) %}
+            <li>
+              <strong>{{ penyakit }}:</strong>
+              <span
+                class="percentage"
+                {%
+                if
+                percentage
+                <
+                30
+                %}
+                style="color: rgb(36, 207, 50)"
+                {% elif percentage < 60 %} style="color: var(--bg-sunglow);"
+                {% else %} style="color: rgb(218, 14, 14);"
+                {% endif %}> {{ percentage }}%
+              </span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
 
-      {% if diagnosis_results | length > 1 %}
-      <div class="penyakit-lain">
-        <p>Penyakit lain yang mungkin diderita:</p>
-        <ul>
-          {% for penyakit, cf in diagnosis_results[1:] %}
-          <li><strong>{{ penyakit }}:</strong> {{ (cf * 100) | round(2) }}%</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %} {% else %}
-      <p>
-        Tidak ada penyakit yang terdiagnosa berdasarkan gejala yang Anda pilih.
-      </p>
-      {% endif %}
+        {% endif %}
 
-      <div class="button-container">
-        <button onclick="window.location.href='{{ url_for('start') }}'">
-          Kembali ke Halaman Utama
-        </button>
+        <!-- Suggestions Section -->
+        <div class="suggestions">
+          <p class="subtitle">Saran:</p>
+          {% if diagnosis_results[0][0] == "Jantung Koroner" %}
+          <ol>
+            <li>
+              Segera konsultasikan dengan dokter untuk pemeriksaan lebih lanjut.
+            </li>
+            <li>
+              Hindari aktivitas fisik yang berat dan pastikan Anda cukup
+              istirahat.
+            </li>
+            <li>
+              Segera periksakan jantung Anda dengan tes EKG untuk memastikan
+              kondisi lebih lanjut.
+            </li>
+            <li>
+              Perhatikan pola makan, kurangi konsumsi garam dan lemak jenuh.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Gagal Jantung Kongestif" %}
+          <ol>
+            <li>Segera hubungi dokter untuk evaluasi jantung Anda.</li>
+            <li>
+              Pastikan posisi tidur dengan dua bantal untuk membantu pernapasan.
+            </li>
+            <li>
+              Periksa dan kontrol pembengkakan pada kaki untuk menghindari
+              komplikasi lebih lanjut.
+            </li>
+            <li>
+              Batasi asupan garam dalam diet Anda untuk menghindari
+              pembengkakan.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Katup Jantung" %}
+          <ol>
+            <li>
+              Lakukan pemeriksaan dengan dokter spesialis jantung untuk
+              memastikan kondisi katup jantung.
+            </li>
+            <li>
+              Perhatikan gejala batuk berdarah, ini dapat menjadi indikasi
+              serius.
+            </li>
+            <li>
+              Cobalah tidur dengan posisi lebih tinggi agar pernapasan lebih
+              lancar.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Aritmia" %}
+          <ol>
+            <li>
+              Periksa ritme jantung Anda dengan alat EKG untuk mendeteksi
+              kelainan irama jantung.
+            </li>
+            <li>Hindari stres yang berlebihan dan perbanyak istirahat.</li>
+            <li>
+              Jika Anda merasa pusing atau kehilangan kesadaran, segera cari
+              bantuan medis.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Jantung Bawaan" %}
+          <ol>
+            <li>
+              Segera konsultasikan dengan dokter spesialis jantung anak (untuk
+              bayi) atau jantung dewasa untuk pemeriksaan lebih lanjut.
+            </li>
+            <li>
+              Pastikan bayi Anda mendapatkan perawatan yang tepat untuk masalah
+              pernapasan.
+            </li>
+            <li>
+              Perhatikan tanda-tanda kebiruan pada bibir atau kuku, dan segera
+              bawa ke rumah sakit jika perlu.
+            </li>
+          </ol>
+          {% elif diagnosis_results[0][0] == "Pembuluh Darah" %}
+          <ol>
+            <li>
+              Lakukan pemeriksaan pada sistem peredaran darah Anda, terutama
+              jika mengalami pembengkakan atau kesemutan.
+            </li>
+            <li>
+              Jika luka pada kaki atau tangan sulit sembuh, segera periksakan ke
+              dokter untuk kemungkinan adanya gangguan peredaran darah.
+            </li>
+            <li>
+              Kurangi konsumsi garam dan perbanyak makan makanan yang baik untuk
+              pembuluh darah.
+            </li>
+          </ol>
+          {% endif %}
+        </div>
+
+        {% else %}
+        <p class="no-penyakit">
+          Tidak ada penyakit yang terdiagnosa berdasarkan gejala yang Anda
+          pilih.
+        </p>
+        {% endif %}
+
+        <div class="button-container">
+          <button
+            class="btn"
+            onclick="window.location.href='{{ url_for('start') }}'">
+            Kembali ke Halaman Utama
+          </button>
+        </div>
       </div>
+      <div class="blob-1"></div>
+      <div class="blob-2"></div>
     </div>
   </body>
 </html>
