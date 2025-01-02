@@ -155,4 +155,4 @@ def diagnose_route():
     return render_template('result.html', diagnosis_results=diagnosis_results)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
