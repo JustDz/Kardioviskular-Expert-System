@@ -20,7 +20,7 @@ G11: Sesak Saat Malam Hari - 0.9
 G17: Mudah Lelah - 0.9
 G31: Batuk - 0.7
 
-P03 - Penyakit Katup Jantung
+P03 - Katup Jantung
 G13: Berdebar - 0.9
 G06: Sesak Nafas - 0.9
 G14: Batuk Berdarah - 0.5
@@ -39,7 +39,7 @@ G06: Sesak Nafas - 0.75
 G15: Nadi Tidak Teraba - 0.75
 G16: Nadi Tidak Teratur - 1
 
-P05 - Penyakit Jantung Bawaan
+P05 - Jantung Bawaan
 G06: Sesak Nafas - 0.9
 G18: Bibir Membiru - 0.9
 G19: Bagian Bawah Kuku Membiru - 1
@@ -48,7 +48,7 @@ G20: Infeksi Saluran Nafas Berulang - 0.8
 G21: Sulit menyusui pada bayi - 0.9
 G33: Berat Badan Berkurang - 0.8
 
-P06 - Gangguan Pembuluh Darah
+P06 - Pembuluh Darah
 G09: Kaki Bengkak - 0.6
 G22: Nyeri pada Tangan/Kaki - 0.8
 G23: Kaki/Tangan Memerah - 0.8
@@ -63,7 +63,7 @@ G07: Pusing - 0.4
 G04: Penurunan Kesadaran - 0.4
 G15: Mudah Lelah - 0.5
 
-P07 - Penyakit Cardiomyopathy
+P07 - Cardiomyopathy
 G06: Sesak Nafas - 0.9
 G17: Mudah Lelah - 0.5
 G09: Kaki Bengkak - 0.6

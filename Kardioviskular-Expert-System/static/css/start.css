@@ -382,6 +382,7 @@ body.nav-active {
   color: var(--text-white);
   box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
   text-align: left;
+  cursor: default;
 
   img {
     position: absolute;
